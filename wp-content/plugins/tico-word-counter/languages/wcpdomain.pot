@@ -1,0 +1,45 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Tico Word Counter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-28 09:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.5; wp-5.3.9\n"
+"X-Domain: wcpdomain"
+
+#. Author of the plugin
+msgid "Carolina Ahn"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/carolahn"
+msgstr ""
+
+#. Description of the plugin
+msgid "Post word counter plugin."
+msgstr ""
+
+#: tico-word-counter.php:41
+msgid "This post has"
+msgstr ""
+
+#. Name of the plugin
+msgid "Tico Word Counter"
+msgstr ""
+
+#: tico-word-counter.php:124
+msgid "Word Count"
+msgstr ""
+
+#: tico-word-counter.php:41
+msgid "words"
+msgstr ""
