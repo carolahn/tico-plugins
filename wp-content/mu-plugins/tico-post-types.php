@@ -46,7 +46,7 @@ function tico_post_types() {
         'capability_type' => 'designer',
         'map_meta_cap' => true,
         'show_in_rest' => true,
-        'supports' => array('title', 'excerpt', 'thumbnail'),
+        'supports' => array('title', 'excerpt', 'thumbnail', 'editor'),
         // 'rewrite' => array('slug' => 'products'),
         // 'has_archive' => true,
         'public' => true,

@@ -14,6 +14,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ (function(module) {
+
+module.exports = window["React"];
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["apiFetch"];
+
+/***/ }),
+
 /***/ "@wordpress/data":
 /*!******************************!*\
   !*** external ["wp","data"] ***!
@@ -114,6 +134,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
+
+
 
 
 
@@ -134,6 +160,40 @@ wp.blocks.registerBlockType("ticoplugin/featured-designer", {
 });
 
 function EditComponent(props) {
+  const [thePreview, setThePreview] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("");
+  (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+    if (props.attributes.designerId) {
+      updateTheMeta();
+
+      async function go() {
+        const response = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+          path: `/featuredDesigner/v1/getHTML?designerId=${props.attributes.designerId}`,
+          method: "GET"
+        });
+        setThePreview(response);
+      }
+
+      go();
+    }
+  }, [props.attributes.designerId]);
+  (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+    return () => {
+      updateTheMeta();
+    };
+  }, []);
+
+  function updateTheMeta() {
+    const designersForMeta = wp.data.select("core/block-editor").getBlocks().filter(x => x.name == "ticoplugin/featured-designer").map(x => x.attributes.designerId).filter((x, index, arr) => {
+      return arr.indexOf(x) == index;
+    });
+    console.log(designersForMeta);
+    wp.data.dispatch("core/editor").editPost({
+      meta: {
+        featureddesigner: designersForMeta
+      }
+    });
+  }
+
   const allDesigners = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
     return select("core").getEntityRecords("postType", "designer", {
       per_page: -1
@@ -156,7 +216,11 @@ function EditComponent(props) {
       value: designer.id,
       selected: props.attributes.designerId == designer.id
     }, designer.title.rendered);
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "The HTML preview of the selected designer will appear here."));
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    dangerouslySetInnerHTML: {
+      __html: thePreview
+    }
+  }));
 }
 }();
 /******/ })()

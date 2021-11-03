@@ -1,5 +1,7 @@
 import "./index.scss";
 import { useSelect } from "@wordpress/data";
+import { useState, useEffect } from "react";
+import apiFetch from "@wordpress/api-fetch";
 
 wp.blocks.registerBlockType("ticoplugin/featured-designer", {
   title: "Designer Callout",
@@ -14,6 +16,40 @@ wp.blocks.registerBlockType("ticoplugin/featured-designer", {
 })
 
 function EditComponent(props) {
+  const [thePreview, setThePreview] = useState("");
+
+  useEffect(() => {
+    if (props.attributes.designerId) {
+      updateTheMeta();
+      async function go() {
+        const response = await apiFetch({
+          path: `/featuredDesigner/v1/getHTML?designerId=${props.attributes.designerId}`,
+          method: "GET"
+        });
+        setThePreview(response);
+      }
+      go();
+    }
+  }, [props.attributes.designerId]);
+
+  useEffect(() => {
+    return () => {
+      updateTheMeta();
+    }
+  }, []);
+
+  function updateTheMeta() {
+    const designersForMeta = wp.data.select("core/block-editor")
+      .getBlocks()
+      .filter((x) => x.name == "ticoplugin/featured-designer")
+      .map((x) => x.attributes.designerId)
+      .filter((x, index, arr) => {
+        return arr.indexOf(x) == index;
+      });
+    console.log(designersForMeta);
+    wp.data.dispatch("core/editor").editPost({ meta: {featureddesigner: designersForMeta} })
+  }
+
   const allDesigners = useSelect((select) => {
     return select("core").getEntityRecords("postType", "designer", {per_page: -1});
   })
@@ -34,9 +70,7 @@ function EditComponent(props) {
           
         </select>
       </div>
-      <div>
-        The HTML preview of the selected designer will appear here.
-      </div>
+      <div dangerouslySetInnerHTML={{__html: thePreview}}></div>
     </div>
   )
 }
