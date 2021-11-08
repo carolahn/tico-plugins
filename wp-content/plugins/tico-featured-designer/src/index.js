@@ -2,6 +2,7 @@ import "./index.scss";
 import { useSelect } from "@wordpress/data";
 import { useState, useEffect } from "react";
 import apiFetch from "@wordpress/api-fetch";
+const __ = wp.i18n.__;
 
 wp.blocks.registerBlockType("ticoplugin/featured-designer", {
   title: "Designer Callout",
@@ -61,7 +62,7 @@ function EditComponent(props) {
     <div className="featured-professor-wrapper">
       <div className="professor-select-container">
         <select onChange={(e) => props.setAttributes({designerId: e.target.value})}>
-          <option value="">Select a designer</option>
+          <option value="">{__("Select a designer", "featured-designer")}</option>
           {allDesigners.map((designer) => {
             return (
               <option value={designer.id} selected={props.attributes.designerId == designer.id}>{designer.title.rendered}</option>

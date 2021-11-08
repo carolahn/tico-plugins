@@ -143,6 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const __ = wp.i18n.__;
 wp.blocks.registerBlockType("ticoplugin/featured-designer", {
   title: "Designer Callout",
   description: "Include a short description and link to a designer of your choice",
@@ -211,7 +212,7 @@ function EditComponent(props) {
     })
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: ""
-  }, "Select a designer"), allDesigners.map(designer => {
+  }, __("Select a designer", "featured-designer")), allDesigners.map(designer => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       value: designer.id,
       selected: props.attributes.designerId == designer.id

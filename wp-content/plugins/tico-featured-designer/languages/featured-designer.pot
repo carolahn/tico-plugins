@@ -1,0 +1,38 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Featured Designer Block Type\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-04 09:18+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.5; wp-5.8.1\n"
+"X-Domain: featured-designer"
+
+#. Description of the plugin
+msgid "Adds updated information about a designer."
+msgstr ""
+
+#. Author of the plugin
+msgid "Carolina Ahn"
+msgstr ""
+
+#. Name of the plugin
+msgid "Featured Designer Block Type"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/carolahn"
+msgstr ""
+
+#: build/index.js:215 src/index.js:65
+msgctxt "Elige uno designer."
+msgid "Select a designer"
+msgstr ""

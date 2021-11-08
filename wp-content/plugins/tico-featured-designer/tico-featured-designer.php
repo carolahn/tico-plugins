@@ -5,7 +5,9 @@
   Description: Adds updated information about a designer.
   Version: 1.0.0
   Author: Carolina Ahn
-	Author URI: https://github.com/carolahn
+  Author URI: https://github.com/carolahn
+  Text Domain: featured-designer
+  Domain Path: /languages
 */
 
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -39,6 +41,8 @@ class FeaturedDesigner {
   }
 
   function onInit() {
+    load_plugin_textdomain('featured-designer', false, dirname(plugin_basename(__FILE__)) . '/languages');
+
     register_meta('post', 'featureddesigner', array(
       'show_in_rest' => true,
       'type' => 'number',
@@ -47,6 +51,8 @@ class FeaturedDesigner {
 
     wp_register_script('featuredDesignerScript', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-i18n', 'wp-editor'));
     wp_register_style('featuredDesignerStyle', plugin_dir_url(__FILE__) . 'build/index.css');
+
+    wp_set_script_translations('featuredDesignerScript', 'featured-designer', plugin_dir_path(__FILE__) . '/languages');
 
     register_block_type('ticoplugin/featured-designer', array(
       'render_callback' => [$this, 'renderCallback'],
